@@ -3,6 +3,9 @@ cross=true;
 audio=new Audio('../music/battle2.mp3');
 audiogo=new Audio('../music/akatsuki.mp3');
 
+
+
+
 setTimeout(()=>{
 audio.play();
 },500);
@@ -10,7 +13,7 @@ document.onkeydown = function(e){
     console.log("key code is:",e.keyCode);
     if (e.keyCode==38){
         dino=document.querySelector('.dino');
-        dino.classList.add('animateDino' );
+        dino.classList.add('animateDino');
         setTimeout(() => {
             dino.classList.remove('animateDino');
 
@@ -60,19 +63,34 @@ document.onkeydown = function(e){
             dino.classList.remove('narubeast');
             dino.classList.add('naruto');
 
-        },10000);
-        
-       
+        },15000);
+    }
+    if (e.keyCode==83){
+    obstacle = document.querySelector('.obstacle');
+    obstacle.classList.add('obstacleAni');
+    document.getElementById("start").innerHTML = "PRESS UP to JUMP ";
+      setTimeout(()=>{
+      document.getElementById("start").innerHTML = "PRESS LEFT OR RIGHT TO MOVE";
+      },3000);
+      
+      setTimeout(()=>{
+      document.getElementById("start").innerHTML = "PRESS B TO BECOME BEAST";
+      },6000);
 
+      setTimeout(()=>{
+      document.getElementById("start").innerHTML ="";},10000);
+      
+      
+    
+      
     }
     
 }
-
 setInterval(()=>{
     dino = document.querySelector('.dino');
     startGame=document.querySelector('.startGame');
+    obstacle = document.querySelector('.obstacle');
     gameOver= document.querySelector(".gameOver");
-    obstacle= document.querySelector('.obstacle');
     gameContainer= document.querySelector('.gameContainer');
 
     dx= parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
@@ -86,20 +104,19 @@ setInterval(()=>{
      console.log(offsetX,offsetY);
      if(offsetX<120 && offsetY<90){
         gameOver.innerHTML='PRESS R TO REPLAY';
-        gameContainer.style.backgroundImage = "url('../img/gameoverbg2.png')";
+        gameContainer.style.backgroundImage = "url('https://images8.alphacoders.com/106/1066339.png')";
         gameOver.style.background= 'none';
         // startGame.classList.remove('startGame');
         // obstacle.classList.add('deadobstacle');
         obstacle.classList.remove('obstacleAni');
-        var x=window.matchMedia("(max-width:1100px");
-        myFunction(x);
-        x.addListener(myFunction);
         dino.style.left=500+'px';
+        obstacle.style.left=800+'px';
         audiogo.play();
         audio.pause();
         setTimeout(()=>{
-            audiogo.pause();
-            },13000);
+        audiogo.pause();
+        },13000);
+       
      }
      else if(offsetX<100 && cross){
         score+=100;
@@ -130,16 +147,11 @@ setInterval(()=>{
      }
 },100);
 
+
+  
 function updateScore(score){
     scoreCount.innerHTML ="Your Score: "+ score;
 
-}
-function myFunction(x){
-    if(x.matches){
-        dino = document.querySelector('.dino');
-        dino.style.left=100+'px';
-    
-    }
 }
 // function kakashi(){
 
